@@ -3,7 +3,7 @@ const fetch = require('node-fetch'); // Eğer node-fetch yoksa `npm install node
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-const TOKEN = 'MTM5MzE0MTk2NDY0MzIzNzkxOA.GSXFKa.gfPsKcJN9GQwGWNJ94vLuwlGDpgLzY0qxcwYoA'; // Senin token
+const TOKEN = 'MTM5MzE0MTk2NDY0MzIzNzkxOA.Gz0zWg.wpwNp7daMuJenkzqMNFlTXWV76pUvLi-kk-0Yw'; // Senin token
 
 client.on('ready', () => {
   console.log(`Bot aktif! Kullanıcı: ${client.user.tag}`);
