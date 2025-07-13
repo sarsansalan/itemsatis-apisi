@@ -1,12 +1,3 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-
-const app = express();
-const port = 3000;
-
-app.use(bodyParser.json());
-
-// Sahte kullanıcı verileri
 const users = [
   { kullanici: "xShain", sifre: "anan3131" },
   { kullanici: "yigityilmaz6706@gmail.com", sifre: "Cggnu5vT" },
@@ -33,22 +24,24 @@ const users = [
   { kullanici: "kuzeyeymens41@gmail.c", sifre: "112233" }
 ];
 
-// Giriş endpointi
-app.post("/login", (req, res) => {
+export default function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Sadece POST isteği desteklenir" });
+  }
+
   const { kullanici, sifre } = req.body;
+
+  if (!kullanici || !sifre) {
+    return res.status(400).json({ error: "kullanici ve sifre gerekli" });
+  }
 
   const found = users.find(
     (u) => u.kullanici === kullanici && u.sifre === sifre
   );
 
   if (found) {
-    res.json({ success: true, message: "Giriş başarılı" });
+    return res.status(200).json({ success: true, message: "Giriş başarılı" });
   } else {
-    res.status(401).json({ success: false, message: "Kullanıcı adı veya şifre hatalı" });
+    return res.status(401).json({ success: false, message: "Kullanıcı adı veya şifre hatalı" });
   }
-});
-
-// Sunucuyu başlat
-app.listen(port, () => {
-  console.log(`Fake Login API aktif: http://localhost:${port}`);
-});
+}
